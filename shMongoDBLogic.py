@@ -2,7 +2,7 @@ import pymongo
 import collections
 from pprint import pprint
 #create mongo client
-client = pymongo.MongoClient("mongodb+srv://SunhacksAR:temp01@sunhacks2019-rmmqb.mongodb.net/test?retryWrites=true&w=majority")
+client = pymongo.MongoClient("mongodb+srv://SunhacksAR:temp01@sunhacks2019-rmmqb.mongodb.net/test?retryWrites=true&w=majority&ssl_cert_reqs=CERT_NONE")
 #set db to use, in this case we're using a generic name for the sunhack project
 db = client["sunhacks"]
 #the two documents we're using, Users, and Company
