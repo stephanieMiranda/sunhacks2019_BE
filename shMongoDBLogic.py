@@ -50,9 +50,9 @@ class ShMongoDBLogic:
     def buildCompany(self, comp, name, rep, repField, mission, recruit):
             comp["Name"] = name
             comp["Rep"] = rep
-            comp["Rep Field"] = repField
+            comp["Rep_Field"] = repField
             comp["Mission"] = mission
-            comp["recruit"] = recruit
+            comp["Recruiting"] = recruit
             
     #If user does not exist, add user, else print to console and return email of user
     @classmethod
@@ -100,14 +100,18 @@ class ShMongoDBLogic:
         else:
             print("Company already exists")
             return name
+    
     #adding team users for demo        
-    def addTheTeam():
-        addUser('Mason Cole', 'mcole18@asu.edu', '42a881', 'teleportation', 'software engineering', 'complaining')
-        addUser('Jon Bartlett', 'jtbartl2@asu.edu', '42a881', 'flight', 'software engineering', 'Soccer')
-        addUser('Stephanie Miranda', 'smirand6@asu.edu', '425caa', 'levitation', 'software engineering', 'doodling')
+    def buildDB(self):
+        ShMongoDBLogic.addUser('Jacob Wallert', 'jawaller@asu.edu', 'FF821A', 'overthinking', 'software engineering', 'Pancakes')
+        ShMongoDBLogic.addUser('Mason Cole', 'mcole18@asu.edu', '42a881', 'teleportation', 'software engineering', 'complaining')
+        ShMongoDBLogic.addUser('Jon Bartlett', 'jtbartl2@asu.edu', '42a881', 'flight', 'software engineering', 'Soccer')
+        ShMongoDBLogic.addUser('Stephanie Miranda', 'smirand6@asu.edu', '425caa', 'levitation', 'software engineering', 'doodling')
+        ShMongoDBLogic.addCompany('State Farm', 'John Doe', 'Mentor', 'The State Farm mission is to help people manage the risks of everyday life, recover from the unexpected, and realize their dreams.', ['Software Engineering', 'Mathematics', 'Data Science'])
+        ShMongoDBLogic.addCompany('GoDaddy', 'Jane Smith', 'Software Engineer', "GoDaddys vision and mission is to radically shift the global economy toward life-fulfilling independent ventures. We do that by helping our customers kick ass-giving them the tools, insights and the people to transform their ideas and personal initiative into success, however they measure it.", ['Software Engineering', 'Engineering Management', 'Data Science'])
 
     #testing methods for get, add, edit, or all
-    def getTesting():
+    def getTesting(self):
         print(users.find_one({"Name":"Jacob Wallert"}))
         print("------------------------------")
         userDoc = ShMongoDBLogic.getUserByEmail("jawaller@asu.edu")
@@ -122,7 +126,7 @@ class ShMongoDBLogic:
         print("------------------------------")
         pprint(ShMongoDBLogic.getUserByEmail("mcole18@asu.edu"))
         
-    def addTesting():
+    def addTesting(self):
         #new adds
         ShMongoDBLogic.addCompany("Amazon","John Doe","System Engineer", "The mission and vision of Amazon.com is: Our vision is to be earth's most customer-centric company; to build a place where people can come to find and discover anything they might want to buy online.",["Software Engineering", "Electrical Engineering"])
         ShMongoDBLogic.addUser("Paul Jones", "test@donut.org", "C20D49", "Eating", "Chef", "Cooking")
@@ -139,7 +143,7 @@ class ShMongoDBLogic:
         print(ShMongoDBLogic.getUserByEmail("test@donut.org")  != False)
         print(ShMongoDBLogic.getCompanyByName("Amazon")  != False)
  
-    def editTesting():
+    def editTesting(self):
         #new adds
         ShMongoDBLogic.addCompany("Amazon","John Doe","System Engineer", "The mission and vision of Amazon.com is: Our vision is to be earth's most customer-centric company; to build a place where people can come to find and discover anything they might want to buy online.",["Software Engineering", "Electrical Engineering"])
         ShMongoDBLogic.addUser("Paul Jones", "test@donut.org", "C20D49", "Eating", "Chef", "Cooking")
@@ -159,8 +163,10 @@ class ShMongoDBLogic:
         ShMongoDBLogic.getTesting()
         ShMongoDBLogic.addTesting()
         ShMongoDBLogic.editTesting()
-    
-#ShMongoDBLogic.getTesting()
-#ShMongoDBLogic.addTesting()
-#ShMongoDBLogic.editTesting()
-#ShMongoDBLogic.allTesting()
+
+db = ShMongoDBLogic()
+ShMongoDBLogic.buildDB(db)
+#ShMongoDBLogic.getTesting(db)
+#ShMongoDBLogic.addTesting(db)
+#ShMongoDBLogic.editTesting(db)
+#ShMongoDBLogic.allTesting(db)
