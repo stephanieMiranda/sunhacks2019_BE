@@ -50,7 +50,7 @@ class ShMongoDBLogic:
     def buildCompany(self, comp, name, rep, repField, mission, recruit):
             comp["Name"] = name
             comp["Rep"] = rep
-            comp["Rep Field"] = repField
+            comp["Rep_Field"] = repField
             comp["Mission"] = mission
             comp["Recruiting"] = recruit
             
