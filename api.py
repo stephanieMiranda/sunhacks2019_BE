@@ -7,6 +7,7 @@ from shMongoDBLogic import ShMongoDBLogic as db
 
 app = Flask(__name__)
 swagger = Swagger(app)
+# driver = ShMongoDBLogic.get_connection()
 
 @app.route('/getUser/<user_email>/')
 @swag_from(const.user_dict, methods=['GET'])
@@ -16,6 +17,7 @@ def getUser(user_email):
  
     """
     result = db.getUserByEmail(user_email)
+    del result["_id"] 
     print(result)
     pprint(result)
     return jsonify(result)
