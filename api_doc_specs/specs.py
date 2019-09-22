@@ -2,51 +2,62 @@
 test: https://github.com/flasgger/flasgger
 '''
 
-specs_dict = {
+user_dict = {
   "parameters": [
     {
-      "name": "palette",
+      "name": "user_email",
       "in": "path",
       "type": "string",
-      "enum": [
-        "all",
-        "rgb",
-        "cmyk",
-        "hi_mom"
-      ],
-      "required": "true",
-      "default": "all"
     }
   ],
   "definitions": {
-    "Palette": {
+    "User": {
       "type": "object",
       "properties": {
         "palette_name": {
-          "type": "array",
+          "type": "object",
           "items": {
-            "$ref": "#/definitions/Color"
+            "$ref": "#/definitions/User"
           }
         }
       }
     },
-    "Color": {
+    "Name": {
+      "type": "string"
+    },
+    "Email": {
+      "type": "string"
+    },
+    "Favorite_Color": {
+      "type": "string"
+    },
+    "Power": {
+      "type": "string"
+    },
+    "Field": {
+      "type": "string"
+    },
+    "Favorite_Hobby": {
       "type": "string"
     }
   },
   "responses": {
     "200": {
-      "description": "A list of colors (may be filtered by palette)",
+      "description": "A users public information",
       "schema": {
-        "$ref": "#/definitions/Palette"
+        "$ref": "#/definitions/User"
       },
       "examples": {
-        "rgb": [
-          "red",
-          "green",
-          "blue"
-        ]
-      }
+        "User" : {
+      	"Email": "test@donut.derp",
+ 		"Favorite Color": "FF8017",
+ 		"Favorite Hobby": "Pancakes",
+ 		"Field": "Software Engineering",
+ 		"Name": "Jacob Wallert",
+ 		"Nametag": "test@donut.derp.nametag",
+ 		"Superpower": "Overthinking"
+ 		}
+ 		}
     }
   }
 }
