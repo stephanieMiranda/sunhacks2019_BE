@@ -14,7 +14,7 @@ user_dict = {
     "User": {
       "type": "object",
       "properties": {
-        "palette_name": {
+        "user_email": {
           "type": "object",
           "items": {
             "$ref": "#/definitions/User"
@@ -49,13 +49,13 @@ user_dict = {
       },
       "examples": {
         "User" : {
-      	"Email": "test@donut.derp",
- 		"Favorite Color": "FF8017",
- 		"Favorite Hobby": "Pancakes",
- 		"Field": "Software Engineering",
- 		"Name": "Jacob Wallert",
- 		"Nametag": "test@donut.derp.nametag",
- 		"Superpower": "Overthinking"
+      	 "Email": "test@donut.derp",
+ 		     "Favorite_Color": "FF8017",
+ 		     "Favorite_Hobby": "Pancakes",
+ 		     "Field": "Software Engineering",
+ 		     "Name": "Jacob Wallert",
+ 		     "Nametag": "test@donut.derp.nametag",
+ 		     "Superpower": "Overthinking"
  		}
  		}
     }
@@ -75,8 +75,13 @@ products = {
       "schema": {
         "id": "User",
         "required": [
-          "username",
-          "age"
+          "Email",
+          "Favorite_Color",
+          "Favorite_Hobby",
+          "Field",
+          "Name",
+          "Nametag",
+          "Superpower",
         ],
         "properties": {
           "username": {

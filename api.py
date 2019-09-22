@@ -17,14 +17,16 @@ def getUser(user_email):
     """
     result = db.getUserByEmail(user_email)
     print(result)
+    pprint(result)
     return jsonify(result)
 
-@app.route('/productsPost', methods = ['PUT'])
+@app.route('/addUser', methods = ['PUT'])
 @swag_from(const.products)
 def productsPost():
-	rv = {"hi" : True}
-	print(request.json)
-	return jsonify(rv)
+    pprint(request.json)
+    if len(request.json) > 0:
+        return jsonify({"PUT" : "success"})
+    return jsonify({"PUT" : "failed"})
 
 def pprint(py_dict):
 	print(json.dumps(py_dict, sort_keys=True,indent=4, separators=(',', ': ')))
