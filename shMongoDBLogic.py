@@ -52,7 +52,7 @@ class ShMongoDBLogic:
             comp["Rep"] = rep
             comp["Rep Field"] = repField
             comp["Mission"] = mission
-            comp["recruit"] = recruit
+            comp["Recruiting"] = recruit
             
     #If user does not exist, add user, else print to console and return email of user
     @classmethod
@@ -101,10 +101,13 @@ class ShMongoDBLogic:
             print("Company already exists")
             return name
     #adding team users for demo        
-    def addTheTeam():
-        addUser('Mason Cole', 'mcole18@asu.edu', '42a881', 'teleportation', 'software engineering', 'complaining')
-        addUser('Jon Bartlett', 'jtbartl2@asu.edu', '42a881', 'flight', 'software engineering', 'Soccer')
-        addUser('Stephanie Miranda', 'smirand6@asu.edu', '425caa', 'levitation', 'software engineering', 'doodling')
+    def buildDB():
+        ShMongoDBLogic.addUser('Jacob Wallert', 'jawaller@asu.edu', 'FF821A', 'overthinking', 'software engineering', 'Pancakes')
+        ShMongoDBLogic.addUser('Mason Cole', 'mcole18@asu.edu', '42a881', 'teleportation', 'software engineering', 'complaining')
+        ShMongoDBLogic.addUser('Jon Bartlett', 'jtbartl2@asu.edu', '42a881', 'flight', 'software engineering', 'Soccer')
+        ShMongoDBLogic.addUser('Stephanie Miranda', 'smirand6@asu.edu', '425caa', 'levitation', 'software engineering', 'doodling')
+        ShMongoDBLogic.addCompany('State Farm', 'John Doe', 'Mentor', 'The State Farm mission is to help people manage the risks of everyday life, recover from the unexpected, and realize their dreams.', ['Software Engineering', 'Mathematics', 'Data Science'])
+        ShMongoDBLogic.addCompany('GoDaddy', 'Jane Smith', 'Software Engineer', "GoDaddys vision and mission is to radically shift the global economy toward life-fulfilling independent ventures. We do that by helping our customers kick ass-giving them the tools, insights and the people to transform their ideas and personal initiative into success, however they measure it.", ['Software Engineering', 'Engineering Management', 'Data Science'])
 
     #testing methods for get, add, edit, or all
     def getTesting():
@@ -159,7 +162,8 @@ class ShMongoDBLogic:
         ShMongoDBLogic.getTesting()
         ShMongoDBLogic.addTesting()
         ShMongoDBLogic.editTesting()
-    
+
+ShMongoDBLogic.buildDB()
 #ShMongoDBLogic.getTesting()
 #ShMongoDBLogic.addTesting()
 #ShMongoDBLogic.editTesting()
