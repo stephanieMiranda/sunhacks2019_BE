@@ -25,9 +25,14 @@ def getUser(user_email):
 @app.route('/addUser', methods = ['PUT'])
 @swag_from(const.products)
 def productsPost():
-    pprint(request.json)
-    if len(request.json) > 0:
-        return jsonify({"PUT" : "success"})
+    json = request.json
+    pprint(json)
+    if len(json) > 0:
+        # {"Name":"Stephanie Miranda","Email":"smirand6@asu.edu",
+        #"Favorite_Color":"425caa","Superpower":"levitation",
+        #"Field":"software engineering","Favorite_Hobby":"doodling"}
+        result = db.addUser(json["Name"], json["Email"], json["Favorite_Color"], json["Superpower"], json["Field"], json["Favorite_Hobby"])
+        return jsonify({"PUT" : result})
     return jsonify({"PUT" : "failed"})
 
 def pprint(py_dict):
