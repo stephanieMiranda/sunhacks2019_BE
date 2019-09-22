@@ -8,8 +8,16 @@ db = client["sunhacks"]
 users = db["Users"]
 company = db["Company"]
 class ShMongoDBLogic:
+    __db = None
+    @classmethod
+    def get_connection(cls):
+        if cls.__db is None:
+            cls.__db = Connection()
+        return cls.__db
+
     #return a user document from the users database document if the user exists
-    def getUserByEmail(email):
+    @classmethod
+    def getUserByEmail(self, email):
         userDoc = users.find_one({"Email":email})
         if(userDoc == None):
             return False
@@ -17,7 +25,8 @@ class ShMongoDBLogic:
             return userDoc
 
     #return a company document from the company database document if the company exists
-    def getCompanyByName(name):
+    @classmethod
+    def getCompanyByName(self, name):
         comDoc = company.find_one({"Name":name})
         if(comDoc == None):
             return False
@@ -25,6 +34,7 @@ class ShMongoDBLogic:
             return comDoc
 
     #If user does not exist, add user, else print to console and return email of user
+    @classmethod
     def addUser(name, email, color, power, field, hobby):
         if(getUserByEmail(email) == False):
             print("Not found")
@@ -43,6 +53,7 @@ class ShMongoDBLogic:
             return email
 
     #If company does not exist, add comapny, else print to console and return name of comapny
+    @classmethod
     def addCompany(name, rep, repField, mission, recruit):
         if(getCompanyByName(name) == False):  
             newComp = [{"Name" : name,
@@ -67,8 +78,8 @@ class ShMongoDBLogic:
     def getTesting():
         print(users.find_one({"Name":"Jacob Wallert"}))
         print("------------------------------")
-        userDoc = getUserByEmail("test@donut.derp")
-        comDoc = getCompanyByName("State Farm")
+        userDoc = ShMongoDBLogic.getUserByEmail("jawaller@asu.edu")
+        comDoc = ShMongoDBLogic.getCompanyByName("State Farm")
         print("User information for " + userDoc["Name"] + ":")
         print("------------------------------")
         pprint(userDoc)
@@ -77,7 +88,7 @@ class ShMongoDBLogic:
         print("------------------------------")
         pprint(comDoc)
         print("------------------------------")
-        pprint(getUserByEmail("mcole18@asu.edu"))
+        pprint(ShMongoDBLogic.getUserByEmail("mcole18@asu.edu"))
         
     def addTesting():
         #new adds
@@ -99,3 +110,5 @@ class ShMongoDBLogic:
     #getTesting()
     #uncomment to test adds
     #addTesting()
+
+ShMongoDBLogic.getTesting()
