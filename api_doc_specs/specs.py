@@ -2,57 +2,71 @@
 test: https://github.com/flasgger/flasgger
 '''
 
-specs_dict = {
+user_get = {
+"tags": [
+    "users"
+  ],
   "parameters": [
     {
-      "name": "palette",
+      "name": "user_email",
       "in": "path",
       "type": "string",
-      "enum": [
-        "all",
-        "rgb",
-        "cmyk",
-        "hi_mom"
-      ],
-      "required": "true",
-      "default": "all"
     }
   ],
   "definitions": {
-    "Palette": {
+    "User": {
       "type": "object",
       "properties": {
-        "palette_name": {
-          "type": "array",
+        "user_email": {
+          "type": "object",
           "items": {
-            "$ref": "#/definitions/Color"
+            "$ref": "#/definitions/User"
           }
         }
       }
     },
-    "Color": {
+    "Name": {
+      "type": "string"
+    },
+    "Email": {
+      "type": "string"
+    },
+    "Favorite_Color": {
+      "type": "string"
+    },
+    "Power": {
+      "type": "string"
+    },
+    "Field": {
+      "type": "string"
+    },
+    "Favorite_Hobby": {
       "type": "string"
     }
   },
   "responses": {
     "200": {
-      "description": "A list of colors (may be filtered by palette)",
+      "description": "A user's public information",
       "schema": {
-        "$ref": "#/definitions/Palette"
+        "$ref": "#/definitions/User"
       },
       "examples": {
-        "rgb": [
-          "red",
-          "green",
-          "blue"
-        ]
-      }
+        "User" : {
+      	 "Email": "test@donut.derp",
+ 		     "Favorite_Color": "FF8017",
+ 		     "Favorite_Hobby": "Pancakes",
+ 		     "Field": "Software Engineering",
+ 		     "Name": "Jacob Wallert",
+ 		     "Nametag": "test@donut.derp.nametag",
+ 		     "Superpower": "Overthinking"
+ 		}
+ 		}
     }
   }
 }
 
 
-products = {
+user_put = {
   "tags": [
     "users"
   ],
@@ -64,8 +78,13 @@ products = {
       "schema": {
         "id": "User",
         "required": [
-          "username",
-          "age"
+          "Email",
+          "Favorite_Color",
+          "Favorite_Hobby",
+          "Field",
+          "Name",
+          "Nametag",
+          "Superpower",
         ],
         "properties": {
           "username": {
@@ -102,4 +121,113 @@ products = {
       }
     }
   }
+}
+
+sponsor_get = {
+"tags": [
+    "sponsors"
+  ],
+  "parameters": [
+    {
+      "name": "sponsor_name",
+      "in": "path",
+      "type": "string",
+      "schema": {
+        "id": "Sponsor",
+        "required": [
+          "Name",
+          "Recruiting",
+          "Rep",
+          "Rep_Field"
+          ]
+          }
+    }
+  ],
+  "definitions": {
+    "Sponsor": {
+      "type": "object",
+      "properties": {
+        "sponsor_name": {
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/Sponsor"
+          }
+        }
+      }
+    },
+  "responses": {
+    "200": {
+      "description": "A sponsor's public information",
+      "schema": {
+        "$ref": "#/definitions/Sponsor"
+      },
+    "Name": {
+      "type": "string"
+    },
+    "Recruiting": {
+      "type": "string"
+    },
+    "Rep": {
+      "type": "string"
+    },
+    "Rep_Field": {
+      "type": "string"
+    }
+  },
+      "examples": {
+        "Sponsor" : {
+        'Mission': 'GoDaddys vision and mission is to radically shift the global '
+            'economy toward life-fulfilling independent ventures. We do that '
+            'by helping our customers kick ass-giving them the tools, insights '
+            'and the people to transform their ideas and personal initiative '
+            'into success, however they measure it.',
+            'Name': 'GoDaddy',
+            'Recruiting': ['Software Engineering',
+                'Engineering Management',
+                'Data Science'],
+            'Rep': 'Jane Smith',
+            'Rep Field': 'Software Engineer'}
+    }
+    }
+  }
+}
+
+meta_swag = {
+    "swagger_version": "2.0",
+    "title": "WARU",
+    "headers": [
+        ('Access-Control-Allow-Origin', '*'),
+        ('Access-Control-Allow-Methods', "GET, POST, PUT, DELETE, OPTIONS"),
+        ('Access-Control-Allow-Credentials', "true"),
+    ],
+    "specs": [
+        {
+            "version": "0.0.1",
+            "title": "WARU RESTish API",
+            "endpoint": 'v1_spec',
+            "description": "Hey we use JSON so it\'s RESTish =]",
+            "route": '/v1/spec',
+            # # rule_filter is optional
+            # # it is a callable to filter the views to extract
+            # "rule_filter": lambda rule: rule.endpoint.startswith(
+            #     'should_be_v1_only'
+            # ),
+            # # definition_filter is optional
+            # # it is a callable to filter the definition models to include
+            # "definition_filter": lambda definition: (
+            #     'v1_model' in definition.tags)
+        },
+        {
+            "version": "0.0.2",
+            "title": "Api v2",
+            "description": 'This is the version 2 of our API',
+            "endpoint": 'v2_spec',
+            "route": '/v2/spec',
+            # "rule_filter": lambda rule: rule.endpoint.startswith(
+            #     'should_be_v2_only'
+            # ),
+            # "definition_filter": lambda definition: (
+            #     'v2_model' in definition.tags)
+        }
+    ]
 }
